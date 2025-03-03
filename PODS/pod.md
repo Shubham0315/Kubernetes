@@ -38,5 +38,24 @@ Practical Demo
  
   ![image](https://github.com/user-attachments/assets/ca0ae248-64fa-4e4a-b31e-afe4ee96ecbd)
 
+
+- Write pod.yml file like below
+
+![image](https://github.com/user-attachments/assets/b5b1ca83-e193-4ea8-95f0-0199f50744ab)
+
+- Name of image is nginx. image version is there, provide port
+- To compare with docker command :- **docker run -d nginx:1.14.2 --name=nginx -p 80:80**
+- From above commands we can say pod is just specification for our docker containers
+
+- To create resources in K8S using specifications in pod.yml :- kubectl create -f pod.yml
+- To check pods/appn go created :- **kubectl get pods or kubectl get pods -o wide**
+  - -o wide to get details of pod like IP. 
+
+![image](https://github.com/user-attachments/assets/7fb84542-506a-412d-8783-22a37b120bb6)
+
+- To login K8S cluster and see application is running or not :- **minikube ssh**
   
-  
+- To delete pod :- **kubectl delete pod #NAME**
+
+- To verify/debug applications. To check logs :- **kubectl logs nginx**
+- To print all info of our pod like status of everytjing inside pod :- **kubectl describe nginx**
