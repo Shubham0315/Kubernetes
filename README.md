@@ -79,3 +79,44 @@ Kubernetes Architecture
   - **Cloud Controller Manager** :- K8S can be run on cloud platforms like EKS, AKS, GKE. If we get request to create LB and if we send this request to K8S it has to understand underlying cloud provider. So K8S has to translate request from user to API request our cloud provider understands. This has to be implemented on CCM. CCM is open source. Any new cloud provider can take code from GitHub of CCM and write their logic so that in that cloud provider K8S is supported. If we're running K8s on premise, CCM is not at all required
 
 ![image](https://github.com/user-attachments/assets/50e98585-dbd8-4f88-9aad-9b969ec603e5)
+
+
+K8S Production Systems
+-
+- This includes how devops engineers manage lifecycle like creation, upgrade, configuration and deletion of K8S clusters in production.
+- We practice K8S on minikube or local cluster setups like K3S, kind, etc. But these are for development purposes, just local K8S clusters should not be used on prod.
+- DevOps engineers should manage lifecycle of K8S clusters
+
+- K8S is open source container orchestration solution platform having many distributions like EKS, Openshift, AKS, GKE, rancher,etc. Here we build user experience on top of K8S
+  - If we have any issue with EKS, we can raise support ticket on amazon as we pay for it. If we install K8S on EC2, AWS asks to get support for it by EKS
+  - If we've 100s of K8S clusters in organization, to run them there can be 100s of developers. If we ask each developer to create EKS cluster so all the revenue will go into EKS
+  - So in staging or preprod we use K8S systems
+  - So in production K8S is mostly used, then openshift, rancher, VM Ware and then EKS/AKS/GKE
+ 
+- Difference between installing minikube and K8S directly on production
+  - If we install K8S, we install it with all enterprise level capabilities. In minikube CPU and RAM itself are just 2 GB
+ 
+- If we install EC2 instanced and install K8S on top if it to make it a cluster, that means we're managing the K8S cluster and amazon wont provide us any support for issues with K8S. Instead if we use KES, we get support from amazon as it is managed solution from AWS. EKS is basically distribution of amazon with additional wrappers, plugins and CLI option.
+
+KOPS - Kubernetes Operations - To manage K8S Clusters
+-
+- Most widely used tool for installing K8S
+- Create EC2 on personal laptop for which we require python3, AWS CLI and Kubectl
+- Install KOPS then.
+- Now we need to provide access to IAM user like AmazonEC2FullAccess, AmazonS3FullAccess, IAMFullAccess, AmazonVPCFullAccess (Required for IAM user only, not ADMIN user). For admin just run "aws Configure"
+
+- For KOPS, we need S3 bucket as prerequisite as KOPS manages many K8S clusters and it can store all configs of them in S3 for storage.
+  - Command :- **aws s3api create-bucket kops-shubham-storage --region us-east-1**
+- Now to create K8S cluster
+  - Command :- **kops create-cluster --name=demok8scluster.k8s.local --state=s3://kops-shubham-storage --zones=us-eat-1a --node-count=1 --nodesize=t2.micro --master-size=t2.micro --master-volume-size=8 --node-volume-size=8**
+  - Here only cluster name is with domain name as k8s.local, in prod we can use amazon.com or anything like domain name and domain has to be configured in route53
+ 
+  ![image](https://github.com/user-attachments/assets/b1e46a8f-08e4-485f-9e60-02f7e93bfbfc)
+
+- To update the confurations of cluster created
+  -  Command :- **kops update cluster demok8scluster.k8s.local --yes**       (Charges applicable)
+ 
+- To configure domain in route53
+
+![image](https://github.com/user-attachments/assets/727902fd-6aad-4d2a-9ad0-a81eb7c8c7c3)
+
