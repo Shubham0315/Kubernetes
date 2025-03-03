@@ -1,0 +1,28 @@
+- There are many K8S clusters like minikube, k3s. 
+
+- Steps to install Minikube  
+  - Install Minikube
+  - Intsall kubectl (K8S CLI to interact with K8C cluster)
+
+- To install Minikube, we need to have below prerequisites 
+  - 2 CPU
+  - 2 GB Free memory
+  - 20 GB Free disk space
+  - Internet connection
+  - Hypervisor to create virtual machine on top of our laptop
+
+1. Download and run installer for free release or run below
+- In power shell run below to setup path
+  - New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force
+Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe' -UseBasicParsing
+
+2. Run below in powersehll as admin to add minikube.exe binary to our path
+- $oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)
+if ($oldPath.Split(';') -inotcontains 'C:\minikube'){
+  [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)
+}
+
+- Then close the powershell session and do minikube start to start cluster.
+
+3. Install Kubectl
+- Go to K8S documentation and install kubectl
