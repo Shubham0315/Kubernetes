@@ -80,7 +80,7 @@ Practical Demo
 - We can have application inside cluster and our organisation members trying to access app, we have to expose app on k8s worker node IP address. So that members in orgn can access app using worker node IP address  --> Nodeport mode can be used. For people outside our organisation, we need to create public IP address.
 - Here we can use Node port and LB Mode
 
-- There are 3 concepts for the same
+- There are 3 concepts for the service
 
 **1. Expose Application to external world**
 -
@@ -110,3 +110,25 @@ Practical Demo
 ![image](https://github.com/user-attachments/assets/d84502f6-cba8-4aec-98f9-0f39b11440b8)
 
   - Now as we can see above, external IP will not be allocated as its minikube
+
+**2. Service Discovery**
+-
+- Edit the service to change label name :- **kubectl edit svc $name**
+- But better to vi service.yml and remove one character from previously configured label. So label of our pod and service is different
+- Now check if service discovery able to detect pods. It wont as labels and slectors are different (even if its character mismatch)
+- Now app wont be accessible even through browser nor curl as we couldnt connect to server
+- So changing selector, service is not discoverable. After reverting back the changes, give it one minute as kubeproxy has to update rules and IPTable so as to be discoverable
+
+**3. Load Balancing**
+-
+- Load balancing is required to distribute the loads on application/pods level.
+- But pods dont have LB by default. If we create service we get LB
+
+- We can install kubeshark for the same and open it
+- Now we can run the curl command used earlier multiple times to check if the request of accessing application via curl is being segregated amongst the nodes/replicas of our pods (lest say our pods are 172.17.0.5 and 172.17.0.7)
+
+![image](https://github.com/user-attachments/assets/8d023d1d-8afc-41ae-aa76-81f2bb245f4a)
+
+- Thus here K8S service does the LB. From laptop we're executing 192.168 IP address from where request goes to minikube IP which is 172.17 from here it goes to service
+
+- Pachet flow :- **Application IP - Minikube IP - Service**
