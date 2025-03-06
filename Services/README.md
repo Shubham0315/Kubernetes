@@ -76,4 +76,29 @@ Practical Demo
 - If we delete one pod, rs will create new pod with new IP address. The user who tries to access app on older IP, will get traffic loss. This is due to dynamic allocation of IP address, where IP address of newly created pod changes as per older
 - Thats why we need service discovery mechanism. If k8s services identified pods using IP address it becomes wrong as it will face traffic loss as IP address are changed. K8s service identifies pods using labels and selectors so that when new pod comes up, its label will remain the same (although IP address might change). Label is like stamp
 
-- 
+- For people within organization we can use service concept
+- We can have application inside cluster and our organisation members trying to access app, we have to expose app on k8s worker node IP address. So that members in orgn can access app using worker node IP address  --> Nodeport mode can be used. For people outside our organisation, we need to create public IP address.
+- Here we can use Node port and LB Mode
+
+- Create service.yml. Keep labels/selectors same as pods created. Service will only look for pod having the label mentioned. Service will only bother about labels and selectors.
+  - Copy the label name from "template" section of our deployment.yml
+  - Change the target port in service.yml. (On target port our application runs)
+ 
+ ![image](https://github.com/user-attachments/assets/7c9b2863-504f-453d-acb7-9d63f540d886)
+
+  - Now apply the service :- **kubectl apply -f service.yml**
+
+  - Check the service created :- kubectl get svc :- Checks application running, cluster IP.
+  - As here we're using node port, we can see port mapping is done for the same
+  - Clusetr IP : 80 is mapped with 30007.
+
+![image](https://github.com/user-attachments/assets/a20edd99-7dad-4370-ba26-d6defac866fb)
+
+  - Here if we dont want to use cluster IP and use node IP address (curl -L http://NodeIP ). On same computer, we can access it using browser using cluster IP as well. But for others laptop we cannot access as its external traffic needs LB. Minikube installs VM on laptop so its internal for us to access the aplication. We'll use port 30007 for service to route traffic to pods. We can also use this IP address to access the app using browser
+
+![image](https://github.com/user-attachments/assets/ca0c24a3-7fcc-41dc-809f-0720e97cd3c5)
+
+  -   But if we try to access this from outside, it wont work as we have not exposed app to outside world
+  -   To make it accessible from outside edit the service :- **kubectl edit svc $name**
+  -   Change the type to LoabBalancer.
+  -   This wont work on minikube as LB mode is only supported on cloud
