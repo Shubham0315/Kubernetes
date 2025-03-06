@@ -53,4 +53,43 @@ Ingress controller is just a LOAD BALANCER
 
 Practical Demo
 -
-- 
+- Create ingress resource and setup host based LB with it
+- Go to ingress documentation and copy ingress syntax
+- If anybody wants to reach our application, if they hit on host defined in ingress.yml/bar, they should reach service
+
+![image](https://github.com/user-attachments/assets/81a79af6-29ce-4403-8d03-d8456b57d7b3)
+
+- Now to deploy ingress :- **kubectl apply -f ingress.yml**
+- Ingress gets created but address field is empty. So if we try to hit URL, no output
+
+![image](https://github.com/user-attachments/assets/548b0b29-1768-4744-805d-289870a778a6)
+![image](https://github.com/user-attachments/assets/2912a9e9-ef04-4dd5-8fa7-1b450cc68533)
+
+- This error is as we havent created ingress controller. We've only created ingress resource
+
+- First intsall nginx ingress controller as its lightweight and simple for us.
+- Search for nginx K8S ingress controller and run below command to create ingress controller :- **minikube addons enable ingress**
+
+![image](https://github.com/user-attachments/assets/a979bfdc-cee5-4274-8e0d-99a4d1290871)
+
+- In the end ingress controller is also a pod. To check in which namepsace it is installed :- **kubectl get pods -A | grep nginx**
+  - Here ingress-nginx is namespace and nginx is controller name
+
+![image](https://github.com/user-attachments/assets/0dca691a-c04c-41eb-ba55-92e650f6e70d)
+
+- To check logs of ingress controller :-** kubectl logs $controllerNameWithId -n $IngressName**
+- This command displays ingress resource created
+- We can get resource created in logs at end where we can see it is synced means it goes to nginx LB configuration in nginx.conf file and it updates ingress configurations
+- Now when we check ingress, we can see address field is populated in the output
+
+![image](https://github.com/user-attachments/assets/1fb26121-d96e-418c-8bff-f6fa322756ac)
+
+- Now ingress resource we created using yml can be accessed on foo.bar.com as in yml as we've used ingress controller which updates configurations
+
+- We also have to do one configuration on local K8S cluster. Edit /etc/hosts on minikube as we've not done domain mapping. So foo.bar.com has to be mapped wwith 192.168.64.11 which is ingress IP
+  - When we try to ping foo.bar.com, IP address doesnt exist. Add it in /etc/hosts file
+
+<img width="634" alt="image" src="https://github.com/user-attachments/assets/f43e064c-2db9-42a8-a142-a26fb6ea28b5" />
+
+- So domain will be resolved on the IP
+- This is done only on local not prod.
