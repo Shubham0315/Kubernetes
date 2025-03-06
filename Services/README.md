@@ -80,6 +80,10 @@ Practical Demo
 - We can have application inside cluster and our organisation members trying to access app, we have to expose app on k8s worker node IP address. So that members in orgn can access app using worker node IP address  --> Nodeport mode can be used. For people outside our organisation, we need to create public IP address.
 - Here we can use Node port and LB Mode
 
+- There are 3 concepts for the same
+
+**1. Expose Application to external world**
+-
 - Create service.yml. Keep labels/selectors same as pods created. Service will only look for pod having the label mentioned. Service will only bother about labels and selectors.
   - Copy the label name from "template" section of our deployment.yml
   - Change the target port in service.yml. (On target port our application runs)
@@ -102,3 +106,7 @@ Practical Demo
   -   To make it accessible from outside edit the service :- **kubectl edit svc $name**
   -   Change the type to LoabBalancer.
   -   This wont work on minikube as LB mode is only supported on cloud
+
+![image](https://github.com/user-attachments/assets/d84502f6-cba8-4aec-98f9-0f39b11440b8)
+
+  - Now as we can see above, external IP will not be allocated as its minikube
