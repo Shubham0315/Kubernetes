@@ -46,3 +46,34 @@ SERVICE Scenario
 - service exposes app to external world
 - If we create SVC using EKS we get ELB IP address. So anyone from the world can access this service as it is public IP
 - LB only work on cloud providers.
+
+
+Practical Demo
+-
+- To check if cluster is up and running :- **minikube status**
+
+![image](https://github.com/user-attachments/assets/50c2e633-a100-4616-bcf1-d24c4f5c3ab5)
+
+- To create new resources on K8S, delete the existing ones except K8S default service
+
+- Create dockerfile and build image using it. Include image name and tag while passing in CLI
+
+![image](https://github.com/user-attachments/assets/3bc68239-4b7f-439e-91d0-7b575c4f8977)
+![image](https://github.com/user-attachments/assets/40f0c840-13d7-48a3-8ea4-71d2b191ea17)
+
+- Now we've to deploy this on K8S cluster. Create deployment.yml taking from google
+- Here make sure labels are correct for each entiry as service will be looking for labels and selectors. When we create service we;ve to copy the label as is and use it is selector field of the service. Only then our service will be able to find out the pod. If we remove the label and its common for service and pod, then service will not be able to find the pod and we can see traffic loss
+- Also the image we created using docker, use that name inside the image tag of container. Also make sure to add same port in yml as of dockerfile
+
+![image](https://github.com/user-attachments/assets/87f16032-3ebe-45cd-9f8e-90d73556d57f)
+
+- Now we can create deployment :- **kubectl apply -f deployment.yml**
+
+![image](https://github.com/user-attachments/assets/a7e8e659-78a5-42ca-aff3-18f617e0f496)
+
+- To understand what exectly happens when we run kubectl command, simply add verbose statement :- **kubectl get pods -v=7**   (V=9 to get info about API call)
+
+- If we delete one pod, rs will create new pod with new IP address. The user who tries to access app on older IP, will get traffic loss. This is due to dynamic allocation of IP address, where IP address of newly created pod changes as per older
+- Thats why we need service discovery mechanism. If k8s services identified pods using IP address it becomes wrong as it will face traffic loss as IP address are changed. K8s service identifies pods using labels and selectors so that when new pod comes up, its label will remain the same (although IP address might change). Label is like stamp
+
+- 
