@@ -131,4 +131,4 @@ Practical Demo
 
 - Thus here K8S service does the LB. From laptop we're executing 192.168 IP address from where request goes to minikube IP which is 172.17 from here it goes to service
 
-- Pachet flow :- **Application IP - Minikube IP - Service**
+- Packet flow :- **Application IP - Minikube IP - Service**
