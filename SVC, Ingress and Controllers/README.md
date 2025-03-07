@@ -84,3 +84,50 @@ Ingress Demo
 
   - When someone tries to access location on /second then forward the request to specific service. SS above
   
+Wildcard Ingress
+-
+- If we're on mail.google.com or drive.google.com, google.com is same. So for multiple services instead of creating multiple resources, create only one with wildcard (*.google.com) inside double quotes
+
+![image](https://github.com/user-attachments/assets/7f105d59-262a-49f2-8caa-b301ec9ca6af)
+
+- Apply the wildcard ingress (Here above ingress name is ingress-with-auth)
+- To check created ingress :- **kubectl get ing**
+- Ingress controller identifies ingress resource in yml and is updated IP address
+- To access the same :- **curl 192.168.59.100/second -H 'host: $Name.bar.com**
+
+
+- We can also set legitimate users to access domain. Here we can just annotate ingress to basic auth to achieve basic authentication
+
+TLS
+-
+**1. SSL Passthrough**
+- If we want to enable security, we can use SSL passthrough. It is a way by which client to server request is completely encrypted and our LB which is medium in between both just acts as passthrough. Request passes through LB without encryption or decryption.
+- SSL passthrough passes encrypted HTTPS traffic directly to backend servers without decrypting traffics at LB
+
+![image](https://github.com/user-attachments/assets/d45b4527-c275-484f-a516-c112af7198df)
+
+- Our LB can be sometimes powerful or not which can act as firewalls or can do path based routing. But if we're using it as passthrough, we've to compromise on these features as LB act as just proxy nothing more.
+- Also hacker can send request to server, LB doesnt even look at it and LB can miss the request and hacker can access the server directly as no encryption/decryption happen at LB level
+
+- Suppose during vacation our service is receiving very high requests, service has to do decryption but here LB doesnt do anything. Every request coming is encrypted and service has top decrypt each request so we can see the latency. (Service has to do lot of work).
+
+**2. SSL Offloading**
+- This above problem can be handled by SSL offloading
+  - It is type of TLS we can do with ingress. If we've SSL offloading enabled at ingress, decryption happens at LB level and it sends plain HTTP traffic to our service. So our service doesnt receive lot of load
+
+![image](https://github.com/user-attachments/assets/8dd559ff-4374-493f-a350-d7674ee8b96f)
+
+  - SSL offloading is not recommened in case of security as our LB sends a plain HTTP traffic for our application. So there is chance of vulnerability. If our LB is at edge of our network and it is passing plain HTTP traffic to our application, there can be a data theft possibility.
+  - It is faster than passthrough so that application latency is reduced
+
+**3. SSL Bridging**
+- Also called as re-encrypt. Same as passthrough but here it doesnt send packets directly to the server as LB does some things for us. LB decrypts packet coming from the client and then it would re-encrypt.
+- Every request coming from client, LB reads it and decrypts, looks into the information of the request, then before sending to server it re encrypts the packet. So both Client to LB and LB to app, both communications become secure
+
+![image](https://github.com/user-attachments/assets/c912fc5e-d180-4b23-895b-2d0684bb847f)
+
+- If hacker sends malware request, here due to decryption and LB reading the packet, it aborts the request. Validates malware attacks before sending to server
+- Only here everytime request coming to server, server has to decrypt it
+
+![image](https://github.com/user-attachments/assets/8c8d516e-f077-4297-9367-b1365bea69f1)
+
