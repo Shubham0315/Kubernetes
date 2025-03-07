@@ -27,3 +27,24 @@ In K8S to manage RBAC, we've 3 things
 - Most of the apps have options like login with google. Here we dont have to create account for this application, user can access the app.
   - In K8S, we can pass certain flags to API server which act as OAuth server. If we're using EKS, we can use IAM users and login to K8S. So we need to create IAM OAuth provider.
   - So if we've users and group belonging to it, we can login to K8S using same username/group.
+
+- Even if want to create cluster on EKS and integrate it with keyclock and integrate with GitHub where we can do user management.
+
+- Creating service account is like creating pod. We can create serviceaccount.yml and provide attributes
+  - By default there is a service account for our running pod using which apps talk to API server or any resources on K8S cluster. K8S attaches default svc-acc to our pod.
+ 
+- To define access, K8S supports :- Role and Role binding
+  - Once app is running, we've to grant access and create role. Lets say role should be like it to have access to pods, configMaps, secrets. Create role
+  - To attach role to user, we will use role binding
+  - So basically role is yml file where we write access which is required.
+  - Now role is created and to attach role to service-account, we use role binding
+ 
+We create svc-acc - create role - using role binding bind the svc-acc and role together
+-
+
+- Role takes care of permissions
+- Service account takes care of users
+- Role binding si for binding permissions to users
+
+- If we create role for specific namespace, it is called as role and if we create role within cluster scope, it is cluster role
+
