@@ -57,4 +57,30 @@ Kubernetes Ingress
 
 Ingress Demo
 -
-- Create simple ingress resource
+- Create simple ingress resource, Define httpd service on port 80(defining traffic rules). It should only be accessed if user provides foo.bar.com
+
+![image](https://github.com/user-attachments/assets/a2d7dd07-74bc-4ea5-a72d-fac5fb39d7e6)
+
+- Create ingress using apply command
+- We can have multiple types of ingress controllers in our cluster as well
+- We can also curl the IP and pass host to tell ingress to only allow traffic if host is specific (-H for header). It becomes host based  :- **curl 192.168.59.100 -H 'host: foo.bar.com**
+
+- If user tries to access foo.bar.com with context root(path) as /first then route traffic to http-svc and if he tries to access foo.bar.com with path as /second then route the traffic to meow-svc
+  - Apply ingress and create
+  
+![image](https://github.com/user-attachments/assets/7db2ffb4-d363-4430-9bce-66a10f1129ec)
+
+  - Now if we ry to access same URL, we'll receive 404 as we've not defined any path. As we've defined to only access when user tries to access one of the paths mentioned
+  - Command :- **curl 192.168.59.100/first -H 'host: foo.bar.com'**
+
+![image](https://github.com/user-attachments/assets/2ec2755a-c706-4f87-b456-26f09e6a747f)
+![image](https://github.com/user-attachments/assets/ae60825a-dd21-48b6-8375-8f9fef19e4ad)
+
+- To check logs of ingress :- **kubectl exec -it -n ingress-nginx deploy/ingress-nginx-controller cat /etc/nginx/nginx.conf**
+  - ingress-nginx is namespace and ingress-nginx-controller is controller which updates configs in /etc/nginx/nginx.conf
+  - When we check it we get below
+
+![image](https://github.com/user-attachments/assets/8579f7a2-9de6-4f86-b780-9f3752bc9d26)
+
+  - When someone tries to access location on /second then forward the request to specific service. SS above
+  
