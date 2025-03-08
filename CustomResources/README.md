@@ -40,3 +40,15 @@ Custom Controller (CC)
 - Here CR has to be watched by someone. So devops engineer will deploy Custom Controller. CC can be created across the cluster or for specific namespace
 - DevOps engineer will deploy CC inside namespace. CC is verified by controller and controller will perform required action
 - Istio controller deployed will read CR and perform action
+
+
+
+How to write a Custom Controller
+-
+- Popular medium to write is using GoLang. Initially client-go was used to interact with K8S API
+- To write custom controller, we've to talk to K8S so client-go inside K8S API server will interact with API server
+- We can also write in python, java which came later
+
+- Using GoLang as our programming language in our K8S API, we'll interact with client-go and then setting watchers for it. When we do update, delete, create, K8S will come to know using the watchers.
+- But for our custom K8S controller, we've to create own watchers.
+- We can setup watchers using controller runtime as well. We can setup watchers for virtual service so any action is performed, watchers will notify client-go. 
