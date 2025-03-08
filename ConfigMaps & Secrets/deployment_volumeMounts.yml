@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-pyhon-app
+  labels:
+    app: sample-pyhon-app
+spec:
+  replicas: 2                  #No of instances of pods for our application
+  selector:
+    matchLabels:
+      app: sample-pyhon-app
+  template:
+    metadata:
+      labels:
+        app: sample-pyhon-app
+    spec:
+      containers:
+      - name: python-app
+        image: shubham0315/python-sample-app-demo:v1
+        volumeMounts:
+          - name: db-connection
+            mountPath: /opt
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: db-connection
+          configMap:
+            name: test-cm
