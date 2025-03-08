@@ -52,3 +52,22 @@ How to write a Custom Controller
 - Using GoLang as our programming language in our K8S API, we'll interact with client-go and then setting watchers for it. When we do update, delete, create, K8S will come to know using the watchers.
 - But for our custom K8S controller, we've to create own watchers.
 - We can setup watchers using controller runtime as well. We can setup watchers for virtual service so any action is performed, watchers will notify client-go. 
+
+- To check popular ciustom controllers in K8S :- Go to CNCF documentation
+
+- To check documentation for writing sample K8S controller :- go to github - search "Kubernetes/sample-controller"
+
+
+Demo
+-
+- To install custom resource from istio using helm
+
+![image](https://github.com/user-attachments/assets/3ad12071-59e6-4d70-8fe1-6b30594eeacc)
+
+- When we install istio we can see lot of CRD already there
+
+![image](https://github.com/user-attachments/assets/2795415e-3648-4a87-afb2-bd6606e3ae8f)
+
+- To create istio related controller
+
+**helm install istiod/istiod -n istio-system --wait**
