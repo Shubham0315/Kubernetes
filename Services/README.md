@@ -52,7 +52,7 @@ Practical Demo
 -
 - To check if cluster is up and running :- **minikube status**
 
-![image](https://github.com/user-attachments/assets/50c2e633-a100-4616-bcf1-d24c4f5c3ab5)
+![image](https://github.com/user-attachments/assets/afa0d4bd-b1df-4970-9643-ab8b010c6b53)
 
 - To create new resources on K8S, delete the existing ones except K8S default service
 
