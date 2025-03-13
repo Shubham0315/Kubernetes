@@ -31,17 +31,17 @@ Practical Demo
 
 - For this we can create deployments.
 
+![image](https://github.com/user-attachments/assets/397e74c2-3e3b-4596-a6bc-1cb445198132)
+
 - To create deployments :- **kubectl apply -f deployments.yml**
 - As soon as we create deployment, pod also gets created along with RS
 
-![image](https://github.com/user-attachments/assets/e4357a8a-5673-4c93-a8f3-3d038b259b3b)
-
-![image](https://github.com/user-attachments/assets/67cc58e5-c0de-4e50-8740-9a7e6e1d85ec)
+![image](https://github.com/user-attachments/assets/595b29d4-735e-4b04-a53d-bf0bc814691d)
 
 - Deployment is an abstraction for us to implement auto healing and zero downtime in K8S
 - Even if we delete pod and check if there is any pod is there, we see one pod getting initiated again as RS is 1 in deployment.yml for desired state
 
-![image](https://github.com/user-attachments/assets/4ace2d74-70a7-49be-91b7-d81bc9e7f6bf)
+![image](https://github.com/user-attachments/assets/0c6972b4-bb57-44ff-ae3a-451f9c1e9ec7)
 
 Thus auto healing is achieved here
 -
