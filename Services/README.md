@@ -90,7 +90,7 @@ Practical Demo
   - Copy the label name from "template" section of our deployment.yml
   - Change the target port in service.yml. (On target port our application runs)
  
- ![image](https://github.com/user-attachments/assets/7c9b2863-504f-453d-acb7-9d63f540d886)
+![image](https://github.com/user-attachments/assets/30e90afe-04b0-41c2-9582-092822094754)
 
   - Now apply the service :- **kubectl apply -f service.yml**
 
@@ -98,7 +98,7 @@ Practical Demo
   - As here we're using node port, we can see port mapping is done for the same
   - Clusetr IP : 80 is mapped with 30007.
 
-![image](https://github.com/user-attachments/assets/a20edd99-7dad-4370-ba26-d6defac866fb)
+![image](https://github.com/user-attachments/assets/b33fae31-c607-4b17-8601-83b711213402)
 
   - Here if we dont want to use cluster IP and use node IP address (curl -L http://NodeIP ). On same computer, we can access it using browser using cluster IP as well. But for others laptop we cannot access as its external traffic needs LB. Minikube installs VM on laptop so its internal for us to access the aplication. We'll use port 30007 for service to route traffic to pods. We can also use this IP address to access the app using browser
 
