@@ -34,13 +34,13 @@ Practical Demo
 -
 - Create config map using yml
 
-![image](https://github.com/user-attachments/assets/73d92299-efa2-4146-b908-f120c11b27d4)
+![image](https://github.com/user-attachments/assets/3320ded2-4626-4f6d-b4bd-14267a74c2a3)
 
 - Now create cm :- **kubectl apply -f cm.yml**
 - To check created config maps :- **kubectl get cm**
 - To describe the cm :- kubectl decsribe cm test-cm
 
-![image](https://github.com/user-attachments/assets/2e084a54-f2ba-445f-9a38-862007e3a676)
+![image](https://github.com/user-attachments/assets/81a51483-dc28-4057-a452-e49b60e2f032)
 
 - We can see data entry in it. Now we've to take these fields from config maps and put them as env variable inside K8S pod
 
