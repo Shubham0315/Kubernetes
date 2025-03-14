@@ -57,7 +57,7 @@ Practical Demo
 - Go to ingress documentation and copy ingress syntax
 - If anybody wants to reach our application, if they hit on host defined in ingress.yml/bar, they should reach service
 
-![image](https://github.com/user-attachments/assets/81a79af6-29ce-4403-8d03-d8456b57d7b3)
+![image](https://github.com/user-attachments/assets/39679670-69ee-42eb-a6f7-55eebaae375c)
 
 - Now to deploy ingress :- **kubectl apply -f ingress.yml**
 - Ingress gets created but address field is empty. So if we try to hit URL, no output
