@@ -65,13 +65,15 @@ Practical Demo
 - Here make sure labels are correct for each entiry as service will be looking for labels and selectors. When we create service we;ve to copy the label as is and use it is selector field of the service. Only then our service will be able to find out the pod. If we remove the label and its common for service and pod, then service will not be able to find the pod and we can see traffic loss
 - Also the image we created using docker, use that name inside the image tag of container. Also make sure to add same port in yml as of dockerfile
 
-![image](https://github.com/user-attachments/assets/87f16032-3ebe-45cd-9f8e-90d73556d57f)
+![image](https://github.com/user-attachments/assets/253a91e5-a52a-48e2-b375-42c1003b4332)
 
 - Now we can create deployment :- **kubectl apply -f deployment.yml**
 
-![image](https://github.com/user-attachments/assets/a7e8e659-78a5-42ca-aff3-18f617e0f496)
+![image](https://github.com/user-attachments/assets/28eebe05-5146-4b8b-a044-1490290a1a4f)
 
 - To understand what exectly happens when we run kubectl command, simply add verbose statement :- **kubectl get pods -v=7**   (V=9 to get info about API call)
+
+ ![image](https://github.com/user-attachments/assets/47441ef6-1fad-40b0-b716-171297e02dd5)
 
 - If we delete one pod, rs will create new pod with new IP address. The user who tries to access app on older IP, will get traffic loss. This is due to dynamic allocation of IP address, where IP address of newly created pod changes as per older
 - Thats why we need service discovery mechanism. If k8s services identified pods using IP address it becomes wrong as it will face traffic loss as IP address are changed. K8s service identifies pods using labels and selectors so that when new pod comes up, its label will remain the same (although IP address might change). Label is like stamp
