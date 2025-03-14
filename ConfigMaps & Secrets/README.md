@@ -65,7 +65,7 @@ Practical Demo
 - When we deploy this K8S deployment, it should override existing pods and inside pods if we check env variables we should see new env variable named DB-PORT and value will be 3306. Below we can check for that
   - Apply the deployment. Check pods. Then exec into pod and check if env varibale is created
  
-![image](https://github.com/user-attachments/assets/028fba65-a95a-43da-8d4f-cab62a2a4d9f)
+![image](https://github.com/user-attachments/assets/f3c81581-3061-4041-9e3a-d216a46d406a)
 
 
 How to use ConfigMpas inside your K8S pod?
