@@ -102,14 +102,14 @@ Practical Demo
 
   - Here if we dont want to use cluster IP and use node IP address (curl -L http://NodeIP ). On same computer, we can access it using browser using cluster IP as well. But for others laptop we cannot access as its external traffic needs LB. Minikube installs VM on laptop so its internal for us to access the aplication. We'll use port 30007 for service to route traffic to pods. We can also use this IP address to access the app using browser
 
-![image](https://github.com/user-attachments/assets/ca0c24a3-7fcc-41dc-809f-0720e97cd3c5)
+![image](https://github.com/user-attachments/assets/84e76a60-d746-45da-82a9-7241284318f7)
 
   -   But if we try to access this from outside, it wont work as we have not exposed app to outside world
   -   To make it accessible from outside edit the service :- **kubectl edit svc $name**
   -   Change the type to LoabBalancer.
   -   This wont work on minikube as LB mode is only supported on cloud
 
-![image](https://github.com/user-attachments/assets/d84502f6-cba8-4aec-98f9-0f39b11440b8)
+![image](https://github.com/user-attachments/assets/31f01474-605e-4a8a-8754-8b1d496780b1)
 
   - Now as we can see above, external IP will not be allocated as its minikube
 
