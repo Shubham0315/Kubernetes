@@ -20,7 +20,7 @@ spec:
         env:
           - name: DB-PORT
             valueFrom:
-              configKeyMapRef:
+              configMapKeyRef:
                 name: test-cm
                 key: db-port
         ports:
