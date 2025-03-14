@@ -70,7 +70,7 @@ Practical Demo
 - First intsall nginx ingress controller as its lightweight and simple for us.
 - Search for nginx K8S ingress controller and run below command to create ingress controller :- **minikube addons enable ingress**
 
-![image](https://github.com/user-attachments/assets/a979bfdc-cee5-4274-8e0d-99a4d1290871)
+![image](https://github.com/user-attachments/assets/695a022e-aa3f-45f3-a39e-d3b64ad79d84)
 
 - In the end ingress controller is also a pod. To check in which namepsace it is installed :- **kubectl get pods -A | grep nginx**
   - Here ingress-nginx is namespace and nginx is controller name
