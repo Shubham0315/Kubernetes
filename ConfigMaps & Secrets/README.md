@@ -15,7 +15,7 @@ Config Maps
 
 Secrets
 -
-- Config maps solve the problem of strong data then why do we need secrets?
+- Config maps solve the problem of storing data then why do we need secrets?
 - Secrets deal with sensitive data like DB pass, DB user. If we put this in config maps with other things, this info gets stored inside etcd of K8S as objects. If any hacker gets access to etcd, they can retreive info. So our entore application is compromised in security aspects
 - If we put data in secrets, K8S will encrypt the data at the rest before object gets stored in etcd. So hacker when trying to access etcd, if he doesnt know the decryption key, he can read info from etcd but apart from pass and user. He will get encrypted info which is of no use
 
