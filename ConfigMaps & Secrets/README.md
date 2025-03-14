@@ -46,12 +46,12 @@ Practical Demo
 
 - Create K8S pod for this. Below is the deployment.yml. Apply that as well to create deployment which rolles out replica sets which will create pods for us
 
-![image](https://github.com/user-attachments/assets/d2354601-6671-4755-9feb-d43d72a10f07)
+![image](https://github.com/user-attachments/assets/5803f4c7-3ceb-45d1-8971-c5565e6396d0)
 
 - To check env variables of these pods :- **kubectl exec -it $NameOfPod -- /bin/bash**
   - Take name of pod from :- **kubectl get pods -o wide**
 
-![image](https://github.com/user-attachments/assets/da3f3233-3022-4b9c-8edd-dac021c19732)
+![image](https://github.com/user-attachments/assets/f125d785-69a3-47d4-b52a-a2ecd5b025a4)
 
 - Inside it if we search for env variable, we cannot search any
 
