@@ -3,7 +3,7 @@
 Config Maps
 -
 - Suppose our backend application talks to DB and retrieves somes info and gives it back to user as per request. This info can be DB Port, username, DB pass, connection type, etc.
-- This info can be retrieved using env variable as these values houldn't be hardcoded and can be changed over time. So user can get null or vague info. We can also save these entities inside file inside a path and retrieve from filesystem using OS modules.
+- This info can be retrieved using env variable as these values shouldn't be hardcoded and can be changed over time. So user can get null or vague info. We can also save these entities inside file inside a path and retrieve from filesystem using OS modules.
 
 - Suppose to retrieve DB port or connection type. As k8s deals with containers, user can get the info as part of container environment variable. K8S supports config maps
 - So as devops or config management engineer we create config maps inside K8S cluster and put info like port in config maps, and mount this config map or use info of config map inside K8S pod
