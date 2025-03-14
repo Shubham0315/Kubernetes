@@ -82,24 +82,24 @@ How to use ConfigMpas inside your K8S pod?
   - Inside containers mount this created volume
   - Mounting volume means reading the volume inside K8S pod so provide name inside containers while mounting and provide folder mount path
  
-  ![image](https://github.com/user-attachments/assets/ab77f57d-45cc-4f86-9477-ac51687e0353)
+![image](https://github.com/user-attachments/assets/3bd5ab12-0197-4387-8886-e7c49708c0e6)
 
 - Now apply the deployment and create
 - Exec into pod and grep for env variable, we wont get results as we removed it from deployment.yml
 - But we've mounted this in /opt. To check :- **ls /opt**
 - We can check contents of that file mounted
 
-![image](https://github.com/user-attachments/assets/ba701c57-b37f-4867-acb6-0fa53e237981)
+![image](https://github.com/user-attachments/assets/cedaf31d-7470-42fa-a279-0b5a975abf29)
 
 - Now when we change port in cm.yml and apply the cm. K8S pod without getting restarted should know value of cm is changed
 - We can check describe to see L1 verification
 
-![image](https://github.com/user-attachments/assets/d9df331f-afd5-4e31-926f-e9e1ecf16c99)
+![image](https://github.com/user-attachments/assets/dc26fb1d-e873-4fc1-bbdc-e6dc4701c8a2)
 
 - To check if pods got restarted :- **kubectl get pods**
   - It gives timestamp of start/restart
  
-![image](https://github.com/user-attachments/assets/2ee6c8c6-3cec-4bf8-926c-8377d837d6b3)
+![image](https://github.com/user-attachments/assets/efa2e45e-2ea9-4e31-b815-6cbb82b9fe43)
 
 - Now go inside pod and check if value of port is changed
 
@@ -112,16 +112,16 @@ Secrets Demo
 - Create secret :- **kubectl create secret generic test-secret --form-literal=db-port="3306"**
 - This is to store DB pass/user
 
-![image](https://github.com/user-attachments/assets/a00d3f29-3732-4258-bd47-2528fe6e4492)
+![image](https://github.com/user-attachments/assets/6c199d73-6a04-469b-abf8-d35694ac8b22)
 
 - We can also create secret using secret.yml as well
 - Check describe secret. We can see DB port as 4 bytes, encrypted format
 
-![image](https://github.com/user-attachments/assets/7d880d3b-bc81-4fba-ac58-b7161a0e7c72)
+![image](https://github.com/user-attachments/assets/3b79df97-d719-4a2b-9a83-b3fd37555579)
 
 - If we edit secret :- **kubectl edit secret test-secret**
 
-![image](https://github.com/user-attachments/assets/8e8a87c8-cd3e-4272-bbd2-c4e68c43c6f6)
+![image](https://github.com/user-attachments/assets/df23cf8d-f2e2-45fa-9d2e-415d791da622)
 
 - To check if our Port value (secret value) is 3306 or not here :- **echo MxzMWnG== | base64 --decode**       (MxzMWnG== is value of secret in edit format, above command)
 
