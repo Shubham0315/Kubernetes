@@ -40,6 +40,7 @@ Practical Demo
 
 
 - Write pod.yml file like below
+- In pod spec, we write containers for which we need to provide name and image to be used to create container, provide ports. 
 
 ![image](https://github.com/user-attachments/assets/3b46f110-7e2e-4aaf-a9bb-fe9f1f486a42)
 
