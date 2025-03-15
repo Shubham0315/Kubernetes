@@ -38,3 +38,34 @@ Jobs
 - If we delete job and then reapply it, we can see the job getting created again following the given lifecycle
 
 ![image](https://github.com/user-attachments/assets/df3cd6e9-60ba-420f-b6cb-2d05177d06e8)
+
+
+Cron Jobs
+- 
+- A task that we can schedule.
+
+- Lets write yml file for that where we need to take backup every minute
+- * * * * * -> Min Hr Day DayOfWeek DayOfMonth, here * defines schedule
+- */2 * * * *- every 2nd minute
+- */2 */2  * * * - every 2nd minute of every 2nd hr
+- In yml we define spec of job template which is template of single task which is our job. Basically its cronJob spec. In spec of cron job we schedule that job template and define metadata and labels in it
+
+- Then we define pod specs. We can write multi line commands using >
+
+- When we give data to container we need volume as well - volumeMounts using which we can store data by making folders
+  - In mounts provide directory to mount so that data folder gets creaated
+- Then write restart policy at container level
+
+- Also provide volumes for volume mounts.
+  - Suppose there is container inside our pod and onto our device we've to persist data from container so there is no data loss, thus volumes are created
+  - So inside volumes, we define volume name and its type so that if directory not found it will create one
+
+![image](https://github.com/user-attachments/assets/fde4d6b9-8a20-4902-914b-85afdf9b72cb)
+
+- In above yml, 2 folders will get created backup and data, data folder content will get copied to backup folder. This runs every minute
+- To check cronjobs getting scheduled or not :- **kubectl get cronjobs -n nginx**
+- We can also check logs of backups
+
+![image](https://github.com/user-attachments/assets/43d9db58-e39d-47d9-9943-e3495589360b)
+![image](https://github.com/user-attachments/assets/78c7e65f-a8c5-4722-a0e8-213096f0cd70)
+
