@@ -47,6 +47,9 @@ Practical Demo
 - Name of image is nginx. image version is there, provide port
 - To compare with docker command :- **docker run -d nginx:1.14.2 --name=nginx -p 80:80**
 - From above commands we can say pod is just specification for our docker containers
+- We can also specify namespace where pod needs to be created inside yml manifest only
+
+![image](https://github.com/user-attachments/assets/000ad422-2f6d-44e6-9dc7-5c6b69d01bec)
 
 - To create resources in K8S using specifications in pod.yml :- **kubectl create -f pod.yml**
 - To check pods/appn go created :- **kubectl get pods or kubectl get pods -o wide**
@@ -63,3 +66,19 @@ Practical Demo
 
 - To verify/debug applications. To check logs :- **kubectl logs nginx**
 - To print all info of our pod like status of everytjing inside pod :- **kubectl describe nginx**
+
+- To create pod in specific namespace :-
+
+![image](https://github.com/user-attachments/assets/f2df36d7-6f9a-44f7-8688-43fa1e4a2d1c)
+
+- To go inside pod :- **kubectl exec -it pod/nginx -n nginx -- bash**
+
+![image](https://github.com/user-attachments/assets/1ce36206-8f2a-4ab7-957a-46e1bb51bf87)
+
+
+- To describe pod in new NS :-** kubectl describe pod nginx -n nginx**
+
+![image](https://github.com/user-attachments/assets/cf3797c2-6098-46f6-a403-ca6b2f20ceb2)
+
+- From above SS , default-scheduler assign pod to cluster node, kubelet pulls the nginx image, then kubelet runs nginx container after all data is stored to etcd
+
