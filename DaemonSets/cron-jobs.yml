@@ -15,24 +15,24 @@ spec:
         labels:
           app: minute-backup
 
-      spec:
-        containers:
-        - name: minute-backup-container
-          image: busybox
-          command: 
-          - sh
-          - -c
-          - > 
-            echo "Backup Started" ;
-            mkdir -p /backups &&
-            mkdir -p /data &&
-            cp -r  /data /backup &&
-            echo "Backup Completed";
-          volumeMounts:
-            - name: data-volume
-              mountPath: /data
-            - name: backup-volume
-              mountPath: /backups
+        spec:
+          containers:
+          - name: minute-backup-container
+            image: busybox
+            command: 
+            - sh
+            - -c
+            - > 
+              echo "Backup Started" ;
+              mkdir -p /backups &&
+              mkdir -p /data &&
+              cp -r  /data /backup &&
+              echo "Backup Completed";
+            volumeMounts:
+              - name: data-volume
+                mountPath: /data
+              - name: backup-volume
+                mountPath: /backups
           restartPolicy: OnFailure
           volumes:
             - name: data-volume
