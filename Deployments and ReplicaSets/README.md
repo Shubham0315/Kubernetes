@@ -83,3 +83,6 @@ Rolling Update
 ![image](https://github.com/user-attachments/assets/4d68b540-a5e6-4ea4-9646-992c5e6f47c0)
 
 - Here what happens is while updating pods, it doesnt stop all pod. It updates one by one stopping pods and perform rolling updates.
+
+Deployments are more flexible so used in rolling updates whereas using RS we cannot perform rlling updates
+-
