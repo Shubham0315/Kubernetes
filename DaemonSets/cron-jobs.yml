@@ -4,42 +4,42 @@ metadata:
   name: minute-backup
   namespace: nginx
 
-#spec of Cron Job starts here
 spec:
-  schedule: "* * * * *"     #take backup every 2nd min. run task every 2nd min
+  schedule: "* * * * *"
   jobTemplate:
-    spec:                      #job template spec, template of single task (job)
+    spec:
       template:
         metadata:
           name: minute-backup
-        labels:
-          app: minute-backup
+          labels:
+            app: minute-backup
 
         spec:
           containers:
-          - name: minute-backup-container
+          - name: backup-container
             image: busybox
-            command: 
+            command:
             - sh
             - -c
-            - > 
+            - >
               echo "Backup Started" ;
               mkdir -p /backups &&
-              mkdir -p /data &&
-              cp -r  /data /backup &&
-              echo "Backup Completed";
+              mkdir -p /demo-data &&
+              cp -r /demo-data /backups &&
+              echo "Backup Completed" ;
             volumeMounts:
               - name: data-volume
-                mountPath: /data
+                mountPath: /demo-data
               - name: backup-volume
                 mountPath: /backups
           restartPolicy: OnFailure
           volumes:
             - name: data-volume
-              hostPath :
-                path: /data
+              hostPath:
+                path: /demo-data
                 type: DirectoryOrCreate
             - name: backup-volume
-              hostPath :
+              hostPath:
                 path: /backups
                 type: DirectoryOrCreate
+                                      
