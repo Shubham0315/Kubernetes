@@ -1,9 +1,11 @@
 Kubernetes Deployment
 -
 - If we can deploy our applications on K8S as pod, why do we need deployments?
+- We make the pods, but real thing is to make those pods scalable for which we need deployment
 
 Containers vs Pods vs Deployments
 -
+- For increased traffic we need group of pods which we can create defining replica sets, stateful sets or deployments
 - We create containers using docker. To run the container, we provide specs using CLI.
 - Kubernetes brings enterprise model to this. Instead writing this on CLI, we can write everything in yml manifest which is running specs of our docker container (parameters required to run pod). Pod can be single or multi-container for interdependency of applications. Multi containers promote shared networking between pods.
 
@@ -21,8 +23,12 @@ Containers vs Pods vs Deployments
 End process is we create deployment which rolls out RS which creates no of pods defined in deployment.yml with auto healing capability on our K8S Cluster
 -
 
+- Deployments also provide us with rolling updates. If weve 4 replicas/pods and we changed image of pod, RS gets changed. So in the meantime we might get downtime issue.
+  - Deployment here provides rolling updates using which it says 1st pod is running, till then other pod is gettng updated so application doesnt face any downtime
+- 
 Practical Demo
 -
+- For one pod we cannot assign all traffic, so we create traffic. So to manage replicas there is 'Replication Controller'
 - To list everything running (all resources) on our K8S cluster :- **kubectl get all**
 - To list for all the namespaces :- **kubectl get all -A**
 - If we create pod and it gets deleted or we delete it, user trying to access our application will face issues as they're outside our K8S cluster. After deleting if we try "minikube ssh" we cannot access the application and curl into it.
@@ -30,6 +36,7 @@ Practical Demo
 - In docker also same thing was there
 
 - For this we can create deployments.
+- For deployments, the apiVersion is **apps/v1**
 
 ![image](https://github.com/user-attachments/assets/397e74c2-3e3b-4596-a6bc-1cb445198132)
 
@@ -45,3 +52,8 @@ Practical Demo
 
 Thus auto healing is achieved here
 -
+
+Stateful Sets
+-
+- Pod can get created, deleted, modified. Using SS, we can maintain state of each pod created using RS in sequence
+
