@@ -55,7 +55,12 @@ All these problems are solved by Kubernetes
 K8S doesnt support advanvced Load Balancing capabilities
 
 Kubernetes Architecture
--
+- 
+- Single node means single server, multi node means multile servers. Multi-node is cluster
+- So in K8S we manage cluster not single node where master and worker nodes exist
+- There are some services on master to get the work done by control node
+- Our application work on worker node on K8S cluster, none of the container work on master node
+- 
 - In docker simplest thing is container whereas in K8S its pod
 - Suppose we've VM on top of which docker is installed and container is running on it. If we run container or install (java) application and we dont have its runtime (java) our application won't run. Similarly while running container we need container runtime. In docker we have container runtime component known as "DOCKER SHIM"
 - But in K8S as it provides enterprise support with auto healing, auto scaling, we create master and worker node here (multiple worker can be there). So in K8S we dont directly send request to worker, it has to go through master. Means request goes from control plane to data plane.
@@ -65,24 +70,27 @@ Kubernetes Architecture
 - _**Data Plane / Worker Node**_
   - Worker node is basically required to run our application using below 3 components
   - 3 components are there :- kubeproxy, kubelet, container runtime
-  - **Kubelet** is used for creation of pods or running app and if pod/app not running it informs one component in master (control plane) to take corrective actions
-  - **Kubeproxy** for networking like generating IP addresses and LB capabilities
-  - **Container runtime** actually runs container
+  - **Kubelet** :- used for creation of pods or running app and if pod/app not running it informs one component in master (control plane) to take corrective actions
+  - **Kubeproxy** :- networking like generating IP addresses and LB capabilities. To access the pods as outside user we can use kubeproxy.
+  - **Container runtime** :- actually runs container
 
 - **_Control Plane / Master Node_**
   - For any enterprise level components/tools there are specific standards like cluster creating pods. But to decide on which node pods to be created, is done by master.
   - Many components are there
-  - **API Server** :- To take all incoming requests from users or core component do everything in k8s. Exposes our kubernetes to external world. It is heart of K8S
-  - **Scheduler** :- User tries to create pod, he tries to access API server which decides where to create component (on which node). To schcedule pods/resources on kubernetes. Info decided by API server but acted by Scheduler.
-  - etcd :- We're deploying prod level app on K8s cluster, there has to be component inside kubernetes which acts as backup service or backing store of entire cluster information. It is key value store and entire K8S cluster info is stored as objects or key value pairs inside this etcd. We get the cluster related info from etcd.
+  - **API Server** :- To take all incoming requests from users 9communication gateway0 or core component to do everything in k8s. Exposes our kubernetes to external world. It is heart of K8S. It basically keeps track of things happening on our K8S cluster. So if we'to talk to K8S cluster, we've to go through API server
+  - **Scheduler** :- User tries to create pod, he tries to access API server which decides where to create component (on which node). To schcedule pods/resources on kubernetes worker node. Info decided by API server but acted by Scheduler. Used to schedule containers or pods and run the pod.
+  - **etcd** :- We're deploying prod level app on K8s cluster, there has to be component inside kubernetes which acts as backup service or backing store of entire cluster information. It is key value store and entire K8S cluster info is stored as objects or key value pairs inside this etcd. We get the cluster related info from etcd. It is key value pair data store which stores all data of our K8S cluster.
   - **Controller Manager** :- As K8S supports autoscaling for which it has some controllers like replica sets which maintains state of our K8S pods. In K8S to make sure such components are always running, we have CMs
   - **Cloud Controller Manager** :- K8S can be run on cloud platforms like EKS, AKS, GKE. If we get request to create LB and if we send this request to K8S it has to understand underlying cloud provider. So K8S has to translate request from user to API request our cloud provider understands. This has to be implemented on CCM. CCM is open source. Any new cloud provider can take code from GitHub of CCM and write their logic so that in that cloud provider K8S is supported. If we're running K8s on premise, CCM is not at all required
+ 
+- We can use 'kubectl' to give instructions to our K8S cluster to create resources and act upon them.
+- Components in both nodes communicate with each other using Container Network Interface (CNI)
 
 ![image](https://github.com/user-attachments/assets/50e98585-dbd8-4f88-9aad-9b969ec603e5)
 
 
 K8S Production Systems
--
+- 
 - This includes how devops engineers manage lifecycle like creation, upgrade, configuration and deletion of K8S clusters in production.
 - We practice K8S on minikube or local cluster setups like K3S, kind, etc. But these are for development purposes, just local K8S clusters should not be used on prod.
 - DevOps engineers should manage lifecycle of K8S clusters
