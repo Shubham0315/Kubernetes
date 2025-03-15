@@ -33,6 +33,8 @@ Jobs
 
 ![image](https://github.com/user-attachments/assets/2af1a99b-1e62-4e53-86cc-32630976cf5e)
 
+- Once our job gets run, the pod goes from running state to completed
+
 - If we delete job and then reapply it, we can see the job getting created again following the given lifecycle
 
 ![image](https://github.com/user-attachments/assets/df3cd6e9-60ba-420f-b6cb-2d05177d06e8)
