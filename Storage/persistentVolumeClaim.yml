@@ -12,5 +12,3 @@ spec:
       storage: 1Gi
 
   storageClassName: local-storage
-  hostPath:  
-    path: /mnt/data
