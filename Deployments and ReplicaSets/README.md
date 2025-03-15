@@ -59,7 +59,27 @@ Basically define pod with labels inside template. Define selector to fetch that 
 Thus auto healing is achieved here
 -
 
+- Namespace specific deployment and pod listing
+
+![image](https://github.com/user-attachments/assets/2c8b4f78-5665-4fb2-963e-938873b1b2bb)
+![image](https://github.com/user-attachments/assets/3f0413f4-5846-4d13-894c-f6b2f742f895)
+
+- To scale the replicas usig CLI l- kubectl scale deployment/nginx-deployment -n nginx replicas=5
+
+![image](https://github.com/user-attachments/assets/da9d857e-c99d-4ed6-bde3-4eb5a1b5a83f)
+
 Stateful Sets
 -
 - Pod can get created, deleted, modified. Using SS, we can maintain state of each pod created using RS in sequence
+- Replica sets and stateful sets maintain replicas. Only deployment is used to maintain rolling updated
 
+Rolling Update
+-
+- If we've scaled our deployment and have created 5 replicas. If we check -o wide we get info like which pod is scheduled on which node
+- These pods are using latest version of nginx. But we've to update to older version
+- So to update :- **kubectl set image deployment/nginx-deployment -n nginx=nginx:1.27.3**      (nginx container name: image=image:tag)
+
+![image](https://github.com/user-attachments/assets/fe1d8e65-7a63-42ba-8a5a-4522dec85e62)
+![image](https://github.com/user-attachments/assets/4d68b540-a5e6-4ea4-9646-992c5e6f47c0)
+
+- Here what happens is while updating pods, it doesnt stop all pod. It updates one by one stopping pods and perform rolling updates.
