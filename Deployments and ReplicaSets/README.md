@@ -40,6 +40,9 @@ Practical Demo
 - Here labels are used to give to pods so that deployment identifies the pods are of particular app.
 - To select those pod, we also need selector. So we can tell selector to select whose app name is nginx. If app name and selector's app name gets matched, create our desired replicas
   - In template define pod template. Under it we can define pod spec like container name, image and port
+ 
+Basically define pod with labels inside template. Define selector to fetch that pod label and if matching, create replicas mentioned. And in end define container spec for pod.
+-
 
 ![image](https://github.com/user-attachments/assets/397e74c2-3e3b-4596-a6bc-1cb445198132)
 
