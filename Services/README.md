@@ -134,3 +134,24 @@ Practical Demo
 - Thus here K8S service does the LB. From laptop we're executing 192.168 IP address from where request goes to minikube IP which is 172.17 from here it goes to service
 
 - Packet flow :- **Application IP - Minikube IP - Service**
+
+
+---------------------------------------------------------------
+
+Service Demo
+-
+- We write the service manifest file providing metadata and spec. In spec always defne selector so that using the label service can pick up the app
+- We expose the app to port providing type of it (protocol: TCP). Here are 2 things port and terget port. Port means for external world where we want to expose, target port is of pod port which we want to connect. So when we hit port from external world, the request will go to targetport inside pod.
+- Also we define service type. If we do clusterIP, IP of our cluster with port is available and with it we can map the service. For NodePort, we need to define NodePort as extra here
+- So in below yml, our nginx service maps external world port 80 with cluster port 80 for anything having label as nginx
+- Using below command we can see pod, deployment, service :- **kubectl get all -n nginx**
+
+![image](https://github.com/user-attachments/assets/d3390192-ec97-49de-a3a2-93cb783ba49d)
+
+- Now to access the service on our browser, we need to forward the port
+- Command :- **kubectl port-forward service/nginx-service -n nginx 80:80 --address:0.0.0.0**
+- Use minikubeIP:80, we can access service through browser
+
+![image](https://github.com/user-attachments/assets/b879f098-03b3-4608-af0d-81a02317e455)
+
+- For this we need to expose the port for our EC2, go to EC2, add inbound rule, port range 81 and expose
