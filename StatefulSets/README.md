@@ -48,3 +48,4 @@
 - Even if we delete the pod, we can see the pod of same name go created. Thats how K8S maintains state of resources with same name
 - Here service, volume templates, env variables are tightly coupled to each other so whenever new pod gets created it carries state with it
 
+- In deployment, replicas we can get diff names after recreation
