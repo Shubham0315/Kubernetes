@@ -18,3 +18,16 @@ Practical Demo
 - Create VPA.yml like below
 
 ![image](https://github.com/user-attachments/assets/07ed8166-0624-4e6f-8b98-31e3e8255415)
+
+  - targetRef : Specifies target pods for which VPA will adjust resources
+  - updateMode : We can set to 'auto' to allow VPA to auto adjust resources and restart pod. We can also set it to 'initial'(only apply at pod creation time) or 'off'(disable updates)
+
+- Now apply both deployment and vpa
+
+- Then we can simulate load and observe changes just like HPA
+- Observe pod restarts : **kubectl get pods**
+
+-------------------------------------------------------------------------
+
+- Using VPA we can ensure our apps always have correct amount of resources allocated while avoiding over-provisioning which can reduce costs and improve cluster efficiency
+- Additionally VPA can work alongside HPA for more comprehensive autoscaling strategy in K8S
