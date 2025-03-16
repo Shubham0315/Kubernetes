@@ -2,7 +2,7 @@
 
 - Service was used to discover, LB and exposing application to external world.
 - Initially before 2015, people were creating deployment, pod where deployment will provide auto healing auto scaling, we can create service on top of pod so that we can expose app within or outside k8s cluster with load balancing. There wasn't a concept of Ingress initially.
-- 
+
 - Still there were some practical problems with k8s use.
   - What people used to do is on their virtual machines or physical servers, they deploy the app where they use LB like nginx, FI which ere of enterprise level
 
@@ -15,6 +15,12 @@
   - Blacklisting :- dont allow users from specific country, used to define traffic
  
 - When people migrated from VM to K8S, they realised service was offering LB but it was simple round robin LB
+
+- Lets say if we've to route user to nginx service when he requests for /nginx, route him to alpine service when he asks for /alpine, for this we can use ingress
+- Using Ingress we can re-route the traffic on our K8S cluster
+
+- Suppose we've pods inside a cluster and pods are being managed by a ddeployment. To access the deployment we need service so we we create the service for this deployment. Similarly we've other deployment having pods and we've service created
+  - Here to manage these microservices we need ingress.
 
 Problem-1 :- Enterprise and TLS LB were missing
 -
