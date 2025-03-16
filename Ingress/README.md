@@ -16,11 +16,9 @@
  
 - When people migrated from VM to K8S, they realised service was offering LB but it was simple round robin LB
 
-- Lets say if we've to route user to nginx service when he requests for /nginx, route him to alpine service when he asks for /alpine, for this we can use ingress
-- Using Ingress we can re-route the traffic on our K8S cluster
+![image](https://github.com/user-attachments/assets/1c5dac88-7509-4492-ad3f-e36b7ee06783)
 
-- Suppose we've pods inside a cluster and pods are being managed by a ddeployment. To access the deployment we need service so we we create the service for this deployment. Similarly we've other deployment having pods and we've service created
-  - Here to manage these microservices we need ingress.
+- Apply both of them. So botth the services get created for nginx and notes -app
 
 Problem-1 :- Enterprise and TLS LB were missing
 -
@@ -99,3 +97,39 @@ Practical Demo
 
 - So domain will be resolved on the IP
 - This is done only on local not prod.
+
+------------------------------------------------------------
+
+# TWS
+
+- Lets say if we've to route user to nginx service when he requests for /nginx, route him to alpine service when he asks for /alpine, for this we can use ingress
+- Using Ingress we can re-route the traffic on our K8S cluster
+
+- Suppose we've pods inside a cluster and pods are being managed by a deployment. To access the deployment we need service so we we create the service for this deployment. Similarly we've other deployment having pods and we've service created
+  - Here to manage these microservices we need ingress.
+ 
+- Ingress is a resource to manage traffic and routes. (linkedin/feed).
+- So create deployment and service for /notes-app and /nginx
+- Now when we create ingress we need ingress controller which helps to do routing on cluster level. It is specific to apps (nginx).
+
+![image](https://github.com/user-attachments/assets/227ce1d2-7002-4418-97d3-8596924cc498)
+
+- Now when we check ingress namepsace and pods inside it, we can see pods got created, services also present
+
+![image](https://github.com/user-attachments/assets/73444c2a-e771-4a19-95af-70a53df26a37)
+
+- Now create one ingress file like below. When 80 port of nginx service is reached when we write /nginx and 8000 will be reached when we enter /app
+
+![image](https://github.com/user-attachments/assets/c1b42be4-a11c-48db-b8fa-9b867623e19c)
+
+- Now apply the ingress and we can see ingress running on port 80 without host defined
+
+![image](https://github.com/user-attachments/assets/315b2098-7d3e-4f32-a654-e51f2410b12e)
+
+- This ingress is running through ingress controller of nginx. Now we've to expose that controller. To expose it do port forward, bind port 80 to 80 of ingress and bind address to be 0.0.0.0
+
+![image](https://github.com/user-attachments/assets/d7569db4-9b6a-4f9b-b386-dd1cb1e84695)
+
+- So on port 80 our ingress controller is running now. Add the rule in AWS EC2 as well
+
+
