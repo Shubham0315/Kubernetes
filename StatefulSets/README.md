@@ -1,5 +1,8 @@
 # Stateful Sets
 
+- A StatefulSet is a Kubernetes workload API object used to manage stateful applications. Unlike Deployments, which treat all pods as identical and interchangeable, StatefulSets maintain a stable identity for each pod, making them suitable for applications that require persistent storage, ordered deployment, and consistent network identities.
+
+
 - When we work in production, for some apps even if our state doesnt get mainteained it will work as they're stateless(django/flask). But the DB of apps like mySQL, mongoDB are stateful apps.
 - Thus data inside mySQL has to be persistent always, transactions to be timely. So we cannot manipulate with states of DB.
 - So for stateless apps we use deployments, RS, daemon sets, etc. But for stateful apps we use "StatefulSets". Here also we use RS concept. So pods created will carry some state with it. So even when pod gets deleted and new gets up the state of deleted is transferred to new one. In SS the pods are numbered in sequence
