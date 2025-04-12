@@ -40,7 +40,7 @@ Create New Namespace using YML
 -
 - To create nginx app, we need NS, deployment, pods, service. We can write all in manifest/yml file.
 
-- Kind to be namespace, api version to be K8S version running now. Information to be given is in metadata section where we mention name of Kind9namespace0
+- Kind to be namespace, api version to be K8S version running now. Information to be given is in metadata section where we mention name of Kind(namespace)
 - Then apply the yml file :- **kubectl apply -f namespace.yml**
 - After applying our K8S object/resource gets created
 
