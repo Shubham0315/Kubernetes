@@ -61,7 +61,7 @@ Kubernetes Architecture
 - So in K8S we manage cluster not single node where master and worker nodes exist
 - There are some services on master to get the work done by control node
 - Our application work on worker node on K8S cluster, none of the container work on master node
-- 
+
 - In docker simplest thing is container whereas in K8S its pod
 - Suppose we've VM on top of which docker is installed and container is running on it. If we run container or install (java) application and we dont have its runtime (java) our application won't run. Similarly while running container we need container runtime. In docker we have container runtime component known as "DOCKER SHIM"
 - But in K8S as it provides enterprise support with auto healing, auto scaling, we create master and worker node here (multiple worker can be there). So in K8S we dont directly send request to worker, it has to go through master. Means request goes from control plane to data plane.
@@ -78,7 +78,7 @@ Kubernetes Architecture
 - **_Control Plane / Master Node_**
   - For any enterprise level components/tools there are specific standards like cluster creating pods. But to decide on which node pods to be created, is done by master.
   - Many components are there
-  - **API Server** :- To take all incoming requests from users 9communication gateway0 or core component to do everything in k8s. Exposes our kubernetes to external world. It is heart of K8S. It basically keeps track of things happening on our K8S cluster. So if we'to talk to K8S cluster, we've to go through API server
+  - **API Server** :- To take all incoming requests from users (communication gateway) or core component to do everything in k8s. Exposes our kubernetes to external world. It is heart of K8S. It basically keeps track of things happening on our K8S cluster. So if we'to talk to K8S cluster, we've to go through API server
   - **Scheduler** :- User tries to create pod, he tries to access API server which decides where to create component (on which node). To schcedule pods/resources on kubernetes worker node. Info decided by API server but acted by Scheduler. Used to schedule containers or pods and run the pod.
   - **etcd** :- We're deploying prod level app on K8s cluster, there has to be component inside kubernetes which acts as backup service or backing store of entire cluster information. It is key value store and entire K8S cluster info is stored as objects or key value pairs inside this etcd. We get the cluster related info from etcd. It is key value pair data store which stores all data of our K8S cluster.
   - **Controller Manager** :- As K8S supports autoscaling for which it has some controllers like replica sets which maintains state of our K8S pods. In K8S to make sure such components are always running, we have CMs
