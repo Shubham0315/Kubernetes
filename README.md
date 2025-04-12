@@ -16,7 +16,8 @@ Problems with Docker
   - Here one container impacts another
  
 - **Auto Healing**
-  - If someone kills our container, application inside it wont be accessible unless someone start the container/act upon the container. This process is called "AUTO HEALING". This has to be done without user's manual intervention, container should start by itself
+  - If someone kills our container, application inside it wont be accessible unless someone start the container/act upon the container. 
+  - This has to be done without user's manual intervention, container should start by itself. This process is called "AUTO HEALING".
   - This doesn't happen with docker as there is no Auto Healing capability in docker
   - In organization we can have multiple containers whose monitoring cannot be done manually by devops engineer. So there has to be mechanism of "Auto Healing" just in case any container goes down to avoid traffic issues on application
 
