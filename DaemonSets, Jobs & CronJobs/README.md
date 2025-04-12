@@ -44,6 +44,8 @@ Jobs
 
 ![image](https://github.com/user-attachments/assets/df3cd6e9-60ba-420f-b6cb-2d05177d06e8)
 
+- Pod lifecycle :- Container creating - Running - Terminating - Completed
+
 
 Cron Jobs
 - 
