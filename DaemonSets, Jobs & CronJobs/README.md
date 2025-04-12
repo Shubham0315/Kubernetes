@@ -20,6 +20,11 @@ Jobs
 - In spec, to run job just once we can write completions, if we've to run job usig 2 parallel pods we can use parallelism, then write template
 - Batch generally means one task will be performed or task will be performed in batches
 
+- Basically job is a K8S object that runs a pod to completion means
+  - It runs task once or multiple times
+  - Waits for task to succeed
+  - Then end and doesnt restart
+
 ![image](https://github.com/user-attachments/assets/824c92f1-fa38-4cc5-9971-d822f9aaa34d)
 
 - Here in yml we define that to run command and after executing wait for 10 seconds and task to get closed(sleep). Also attach restart policy as never so task doesnt run again
