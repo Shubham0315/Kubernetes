@@ -64,7 +64,7 @@ Thus auto healing is achieved here
 ![image](https://github.com/user-attachments/assets/2c8b4f78-5665-4fb2-963e-938873b1b2bb)
 ![image](https://github.com/user-attachments/assets/3f0413f4-5846-4d13-894c-f6b2f742f895)
 
-- To scale the replicas usig CLI l- kubectl scale deployment/nginx-deployment -n nginx replicas=5
+- To scale the replicas usig CLI l- kubectl scale deployment/nginx-deployment -n nginx --replicas=5
 
 ![image](https://github.com/user-attachments/assets/da9d857e-c99d-4ed6-bde3-4eb5a1b5a83f)
 
