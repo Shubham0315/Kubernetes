@@ -1,6 +1,6 @@
 # Kubernetes Ingress
 
-- Service was used to discover, LB and exposing application to external world.
+- Service was used to discover apps, doing load balancing and exposing application to external world.
 - Initially before 2015, people were creating deployment, pod where deployment will provide auto healing auto scaling, we can create service on top of pod so that we can expose app within or outside k8s cluster with load balancing. There wasn't a concept of Ingress initially.
 
 - Still there were some practical problems with k8s use.
