@@ -76,7 +76,7 @@ Practical Demo
 ![image](https://github.com/user-attachments/assets/1ce36206-8f2a-4ab7-957a-46e1bb51bf87)
 
 
-- To describe pod in new NS :-** kubectl describe pod nginx -n nginx**
+- To describe pod in new NS :- **kubectl describe pod nginx -n nginx**
 
 ![image](https://github.com/user-attachments/assets/cf3797c2-6098-46f6-a403-ca6b2f20ceb2)
 
