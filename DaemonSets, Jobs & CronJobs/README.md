@@ -1,6 +1,6 @@
 # Daemon Sets
 
-- When we deploy pods and check status, we see pods getting assigned to differebt worker nodes
+- When we deploy pods and check status, we see pods getting assigned to differeNt worker nodes
 - Daemon sets ensure all our nodes must have at least 1 pod/replica running
 - In our daemonset.yml file we dont need to mention replicas here
 
