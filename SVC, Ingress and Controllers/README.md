@@ -32,7 +32,7 @@
 Kubernetes Ingress
 -
 - Suppose we've an ecommerce site where 200-300 services to be exposed. For each service using LB type, we create 200-300 static IPs for which cloud provider will charge us
-- Instead we can create ingress resource. If we've to manage all services using single IP address, we can use ingress. It also defines routing for our services and we can expose our cluster outside. We can do host bases, path based routing.
+- Instead we can create ingress resource. If we've to manage all services using single IP address, we can use ingress. It also defines routing for our services and we can expose our cluster outside. We can do host baseD, path based routing.
 
 ![image](https://github.com/user-attachments/assets/715ef068-1064-48ce-bcf9-da567b2badb0)
 
