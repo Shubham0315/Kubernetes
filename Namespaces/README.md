@@ -8,7 +8,7 @@ Container - Pod - Deployments - Services - User Access
 -
 - If there are multiple apps running on same cluster, to manage those things there can be a confusion.
 
-- In K8S we've namespaces under which all the resources are isolated which wornt disturb resources in other namespaces
+- In K8S we've namespaces under which all the resources are isolated which wont disturb resources in other namespaces
 
 - To check active Namespace on our K8S cluster :- **kubectl get ns/namespaces**
 
