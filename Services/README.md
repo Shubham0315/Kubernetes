@@ -62,7 +62,7 @@ Practical Demo
 ![image](https://github.com/user-attachments/assets/40f0c840-13d7-48a3-8ea4-71d2b191ea17)
 
 - Now we've to deploy this on K8S cluster. Create deployment.yml taking from google
-- Here make sure labels are correct for each entiry as service will be looking for labels and selectors. When we create service we;ve to copy the label as is and use it is selector field of the service. Only then our service will be able to find out the pod. If we remove the label and its common for service and pod, then service will not be able to find the pod and we can see traffic loss
+- Here make sure labels are correct for each entity as service will be looking for labels and selectors. When we create service we;ve to copy the label as is and use it is selector field of the service. Only then our service will be able to find out the pod. If we remove the label and its common for service and pod, then service will not be able to find the pod and we can see traffic loss
 - Also the image we created using docker, use that name inside the image tag of container. Also make sure to add same port in yml as of dockerfile
 
 ![image](https://github.com/user-attachments/assets/253a91e5-a52a-48e2-b375-42c1003b4332)
