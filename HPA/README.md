@@ -37,5 +37,5 @@ PRACTICAL DEMO
 - By setting minimum and maximum no of replicas, we can ensure application is not over-provisioned thus improving cost efficiency
 
 - Metrics can be :- CPU, memory, request count, response times.
-- Here we can alsi integrate HPA for external use with prometheus
+- Here we can also integrate HPA for external use with prometheus
 
