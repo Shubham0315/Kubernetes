@@ -7,7 +7,7 @@ NO SERVICE Scenario
 - As devops engineer we deploy pod as deployment in k8s. Deployment will create the replica set which will create pod (one or many depending on RS)
 - Pods will be multiple to avoid all requests go to single pod while accessing application from users. This is not because of connections pod can take
 - Lets say one replica of app handles 10 requests and we have 100 requests, we have to create 10 pods (define in yaml as replica sets no). If pod goes down, replica set will create new pod even before actual one is deleted or go down. Here pod comes up but IP address will be changed for app/pod
-- We have to share these IP addresses of pods to application teams /test teams and they will try to access the application. If IP address is changes, user will say app is not working as he will be sending request to older IP address app. Although we used auto healing process here, problem occur and users will say application is not reachable
+- We have to share these IP addresses of pods to application teams /test teams and they will try to access the application. If IP address is changed, user will say app is not working as he will be sending request to older IP address app. Although we used auto healing process here, problem occur and users will say application is not reachable
  
 - Here we gave users the IP address of pod before getting killed and after resumption pod IP is changed so user faced the issue.
 
