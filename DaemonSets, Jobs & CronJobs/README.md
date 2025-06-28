@@ -17,7 +17,7 @@ Jobs
 - For this requirement, we create jobs
 
 - Here while writing yml, kind will be job, vrsion will be batch/v1 as its batch job, then define metadata,etc
-- In spec, to run job just once we can write completions, if we've to run job usig 2 parallel pods we can use parallelism, then write template
+- In spec, to run job just once we can write completions, if we've to run job using 2 parallel pods we can use parallelism, then write template
 - Batch generally means one task will be performed or task will be performed in batches
 
 - Basically job is a K8S object that runs a pod to completion means
