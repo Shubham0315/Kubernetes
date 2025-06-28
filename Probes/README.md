@@ -10,7 +10,7 @@
  
 DEMO
 -
-- To chec if our app is working on the mentioned port only, we can add liveness probe below port config and wil ask httpGet to make request of on 3000. If request comes there then liveness probe is working if not there we will get error. Done inside deployment.yml
+- To check if our app is working on the mentioned port only, we can add liveness probe below port config and wil ask httpGet to make request of on 3000. If request comes there then liveness probe is working if not there we will get error. Done inside deployment.yml
 
 ![image](https://github.com/user-attachments/assets/ab60e941-3d0b-4545-a30c-82a0fa7093e8)
 
