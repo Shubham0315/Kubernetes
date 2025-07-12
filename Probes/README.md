@@ -11,7 +11,7 @@
  
 DEMO
 -
-- To check if our app is working on the mentioned port only, we can add liveness probe below port config and wil ask httpGet to make request of on 80. If request comes there then liveness probe is working if not there we will get error. Done inside deployment.yml
+- To check if our app is working on the mentioned port only, we can add liveness/readiness/startup probe below port config and wil ask httpGet to make request of on 80. If request comes there then liveness probe is working if not there we will get error. Done inside deployment.yml
 
 <img width="1557" height="794" alt="image" src="https://github.com/user-attachments/assets/561528ce-903d-41d4-90ce-1ec4dba58fee" />
 
