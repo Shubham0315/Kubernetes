@@ -1,4 +1,4 @@
-<img width="1557" height="794" alt="image" src="https://github.com/user-attachments/assets/2bacfa93-e4eb-490a-beb4-d54ae28d822d" /># Probes
+# Probes
 
 - Probes are used to monitor health of containers inside pod
 - Probes are of 3 types :- Liveness, Readiness and Startup
