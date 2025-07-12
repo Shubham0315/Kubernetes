@@ -25,3 +25,8 @@ DEMO
 - To checkif the liveness/readiness probe got triggered inside pod :- **kubectl describe pod $name**
 
 - Probe check if our app works or not on given port and to check if our pods are successfully running or not
+
+- Path :- Specifies HTTP endpoint K8S will call inside container
+  - path: /health will make request to http://IP:port/health
+ 
+- Port :- Container port to which probe should take HTTP request. Must match a port exposed by container
