@@ -5,7 +5,7 @@
 - Probe is a kind of request that ensure our pod works fine
   - Suppose our pod is working on port 3000 but weve to make sure that its running on 3000.
   - So when probe gets created, it will request internally to port 3000
-  - So if our probe is live or not is decided by Liveness Probes
+  - So if our pod is live or not is decided by Liveness Probes
   - If our pod is getting created and then will get ready, in that case Readiness probe is used
   - When our pod is getting started, so we can use Startup Probe
  
