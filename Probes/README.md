@@ -30,3 +30,5 @@ DEMO
   - path: /health will make request to http://IP:port/health
  
 - Port :- Container port to which probe should take HTTP request. Must match a port exposed by container
+
+- In above yml send HTTPGET request to / on port 80
