@@ -1,0 +1,306 @@
+1. If your firm is experiencing frequent downtimes. How would you leverage Kubernetes to achieve high availability for your applications?
+- Use RS and deployments. Deploy the apps using deployments or stateful sets whether our app is stateful or stateless.
+  Deployments allow to easily scale no of replicas and ensure if one of the pod goes down, others can handle the traffic
+  Stateful sets manage stateful apps by ensuring that each pod has unique identity and persistent storage with ordered deployment
+- Configure K8S service to LB traffic across pods
+  LB service ensures traffic is distributed evenly and if pod fails service will redirect traffic to healthy pods.
+  We can implement heath checks like liveness and readiness probes to ensure K8S auto restart pods that are unhealthy and send traffic to pods that are ready to serve requests
+- Setup multiple nodes in different zones using cloud provider.
+  Ensures even if one zone goes down, app remains available to users
+  Implementing HPA helps handle varying traffic loads by automatically scaling number of pod replicas based on CPU/Memory usage
+
+
+2. How to ensure zero downtime deployment with K8S? Explain strategies
+- Use rolling update strategy which is default strategy for deployments
+  It replaces old versions of app with new ones ensuring the update is done one by one on nodes. So users wont face downtime
+- Define deployment with appropriate parameters like maxUnavailable and maxSurge to control no of pods that can be unavailable and no of extra pods that can be created during update.
+  Setting maxUnavailable to 0 ensures no instance is down during update process
+- Implement readiness probes to make sure that new pods only start receiving traffic when they're fully initialized and ready to handle requests. This prevents downtime if new instances are not ready
+
+
+3. Your firm wants to optimize resource utilization. How to use K8S to manage resources efficiently?
+- Define resource requests and limits for each container in pod. 
+  Resource requests guarantee each pod gets guaranteed amount of CPU and memory (lower limit)
+  Limits prevent pod from using more than specified resources
+- Implement HPA to auto scale number of pods based on CPU or memory. This helps in adjusting no of pods based on load
+- Implement VPA to adjust resource requests and limits for containers in pod based on actual usage patterns
+  This ensures pods are neither under nor over provisioned
+- Use monitoring tools like Prometheus and Grafana.
+
+
+4. How to manage K8S clusters across multiple cloud providers?
+- Centralized cluster management to control all clusters
+  Rancher, Anthos, Openshift help manage clusters across AWS, Azure, GCP
+- Use IaC tool like Terraform to provision clusters uniformly across clouds
+- Use GitOps to automate and sync app deployment across clusters using Git as source
+
+
+5. How can we secure sensitive data in K8S? 
+- Implement RBAC to restrict access to K8S resources based on user roles. Helps only authorized users perform actions on cluster
+- Use K8S secrets to manage sensitive info like passwords, API Keys and certs.
+  Secrets are encrypted at rest using etcd encryption provider and access to secrets should be restricted to only the pods that need them
+- Use tools like Hashicorp vault to encrypt data before it is stored
+- Most cloud providers also offer encryption options for persistent volumes
+
+
+6. Your firm relies heavily on K8S apps and we need to perform regular backups to prevent data loss and ensure business continuity in case of failures or disasters. 
+   How to design and implement comprehensive backup strategy that addresses unique need of K8S environments to ensure reliable, secure backups?
+- Use tools like Velero which is designed for backup and restoring K8S clusters. 
+  Velero allows backing up both cluster state and PV
+  Setup scheduled backups to run at intervals ensuring we have consistent backups of cluster and data
+- We can also implement testing process to regularly restore backups to staging env. 
+  This ensures backups are valid and can be restored when needed. It also help identify issues with backup and restore process
+- Monitoring and alerting should be setup to notify team for any failures in backup process. 
+
+
+7. For performance issues with K8S apps impacting user experience and business operations.
+   How to diagnose root causes? What tools and methodologies to use to monitor, analyze and resolve issues to ensure optimal performace?
+- Start collecting metrics and logs to identify root cause. 
+  Use tools like Prometheus and Grafana to monitor resource usage and app metrics. Setup dashboards and alerts to detect bottlenecks
+- Use K8S Build in tools like 'kubectl top' to check resource usage of nodes and pods. If certain pods are consuming more resources than expected, investigate their resource requests and limits to ensure they're appropriately configured.
+- Bases on findings, take corrective actions like scaling no of replicas, optimizing resource requests and limits.
+
+
+8. How would you implement a canary deployment strategy using Kubernetesto safely roll out new application versions while minimizing risks and ensuring smooth transitions to production?
+-
+
+
+9. Your firm needs to comply with data residency requirements. How to manage K8S clusters to meet requirements?
+-
+
+
+10. To migrate monolith app to microservice on K8S, define steps to decompose monolith, design microservice architecture and handle data migration. 
+   How to ensure smooth transition, manage dependencies and maintain app performance during and after migration?
+- Identify components of monolith app and defining boundaries of new microservices. Involves breaking down monolith into smaller, manageable services that can be developed, deployed and scaled independently. 
+- Setup K8S cluster and configure necessary infrastructure, including networking, storage and security. 
+  This involve setting up namespaces, configure network policies and ensuring cluster is properly secured
+- Containerize individual microservices creating docker images for each component. Write dockerfile and CICD to build/push image
+- To manage deployments, use K8S deployments, SS or daemon sets. Also include services to enable communication from users
+- To handle service discovery, LB or traffic use Ingress.
+- For migration, setup data replication, ensuring data consistency and performing through testing.
+- Use monitoring and logging using Prometheus, Grafana to gain visibility into health and performance of microservices. Used to identify issues.
+
+-----------------------------------------------------
+
+Theory Questions
+
+1. What is Ingress in Kubernetes? How does it differ from a LoadBalancer service?
+- Ingress is K8S API object that manages external access to services within cluster, typically over HTTP/HTTPs
+- Suppose we've 100s of services to be exposed to end users each using LB, we need to create 100s of static IPs for which cloud provider charges us.
+  So we create ingress resource to manage all services using single IP address. 
+  It also defines routing for our services and we can expose our cluster services using host based, path based routing.
+  Ingress resource defines routing rules for services/apps so we can define specific service to be accessed on specific domain name and different context paths
+- Ingress needs ingress controller which watches ingress and updated LB configurations file to update routing details
+
+- LB service exposes single service via cloud. It has no routing logic just forwards request to service.
+  No controller is needed here as managed by cloud provider.
+
+
+
+2. Explain K8S networking model
+- K8S networking is a fundamental component that enables communication between pods/services and users. 
+
+- Pod to pod communication :- Every pod gets its own IP address enabling pods communicate directly with each other across nodes
+- Service networking :- Service exposes set of pods using IP and DNS name (Cluster IP, NodePort, LoadBalancer, ExternalName)
+- Ingress :- Exposes HTTP/S services and provides routing required Ingress controller
+
+
+
+3. RBAC in K8S
+- Allows to define who (users, groups, service accounts) can do what (get, list, create, delete) to which resources (pods, deployments, services) in which namespaces
+- Role defines permissions within specific namespace
+- Cluster Role defines permissions across cluster
+- Role binding :- grants permissions defined in role to subject within namespace
+- Cluster role binding Grants permissions defined in cluster role to subject across entire cluster
+
+- Service accounts :- Provide identity for processes that run in pods. When pod makes API calls to K8S API server, it authenticates using credentials of its service account
+  They are used to :- allow pods to interact with K8S API, control access to resources within cluster, integrating with external systems that need to authenticate to K8S
+
+
+4. How to collect logs from apps running in K8S?
+- Applications should write logs to stdout and stderr
+- Deploy logging agent as Daemonset on each node to collect logs from container runtimes and forward them to centralized logging system
+
+
+5. How to debug pod stuck in pending state
+- kubectl describe pod
+  Check events like :- insufficient CPU/memory, node selector/taints/tolerations, volume issues, networking issues
+- kubectl get events 
+- Check kube-scheduler logs for scheduling decisions
+- Check node resources :- kubectl top nodes
+
+
+6. How to troubleshoot app unreachable from outside of cluster?
+- Check service type. If clusterIP, then not exposed outside
+- Verify service endpoints :- kubectl describe service
+- Check pod status all running and healthy
+- Check ingress and ingress controller with their logs
+- Network firewall, security groups :- For nodePort and LoadBalancer ensure external firewalls allows traffic to IP
+- Ensure kube-proxy is running on all nodes and check its logs
+
+
+7. How to investigate why our apps pods are restarting constantly?
+- describe pods. Look for events like OOMKilled, CrashLoopBackoff, failed probes.
+- check logs for errors and exceptions
+- Check resource limits and requests in pod.yml. 
+
+
+8. You have database running as Statefulset and you need to scale it down. What considerations do you need to make?
+- Statefulsets scale down gracefully by terminating pods in reverse order
+- Before scaling down ensure :-
+  DB is designed for graceful shutdown and data consistency during scale-down
+  PVC :- Understand shutting down SS doesn't auto delete associated PVCs. We need to manually delete if data is no longer needed
+
+
+9. If you have high CPU utilization on one of the worker nodes. How to investigate and resolve it?
+- kubectl top nodes, kubectl describe nodes, kubectl logs pod
+- To resolve 
+  Scale pods, adjust request limits and requests, Node autoscaling if cluster is consistently high on CPU, taints/tolerations/affinity for critical workloads
+
+
+10. We've to deploy new service but need to access database running in different namespaces. How to enable this communication securely?
+- Service discovery 
+- Implement Network policies to explicitly allow ingress traffic from apps namespace to DB service's pods in DB namespace to ensure only authorized communication is allowed
+- Service accounts and RBAC :- If app needs to interact with K8S API to discover the database, ensure app's service account has necessary RBAC permissions
+
+
+11. How did you setup CICD pipelines in K8S?
+- Yes, I've worked with GitLab CI/CD for deploying applications to Kubernetes.
+  We used a pipeline that involved stages for building Docker images, pushing them to a registry, and then using Helm charts to deploy and update our applications in different environments (dev, staging, prod).  
+  We leveraged kubectl commands within the pipeline scripts for specific tasks like checking deployment status and performing rollbacks.
+- Check Jenkins GitHub folder for pipeline
+
+
+12. Explain lifecycle of pod
+- Pending :- Pod is accepted by K8S but one or more container images are not created
+- Running :- All containers in pod are created and at least one container is running
+- Succeeded :- All containers in pod are terminated and wont be restarted *
+- Failed :- All containers in pod are terminated and at least one container is terminated in failure
+
+
+13. What are Init containers?
+- Init containers are special containers that run to completion before main app containers in pods are started
+- They are useful for :-
+  Setup/pre-checks - Performing setup tasks like waiting for service to be ready, cloning a git repo
+  Config - Populating config files before main app starts
+  Permissions - Setting correct file permissions for volumes
+  
+
+14. How to troubleshoot issue where service is not routing traffic to any pods?
+- kubectl describe service - check endpoints field, if empty then no pods are matching service' selector
+- kubectl get pods - verify pods with correct labels exist and are in running state with healthy probes
+- Check targetPort in service yml and containerPort in pod yml, they should match
+- Verify network connectivity between pods and service cluster IP
+
+
+15. What is headless service ?
+- It doesn't have cluster IP. Instead of acting as LB, it provides direct access to pod  IPs via DNS. 
+- When we query DNS name of headless service, it returns IP of pods selected by service
+- Use is stateful apps which need stable network identities
+
+
+16. We're moving from monolith to microservices on K8S. What are some key design considerations for this migration?
+- Ensure all services are properly containerized
+- Break down monolith into manageable, independent microservices
+- Leverage K8S services for inter-service communication
+- Use configMap and secrets for dynamic config
+- Identify stateful and stateless components and bifurcate them 
+- Design network policies for security
+- Design services to be horizontally scalable
+
+
+17. How to handle app config that differs between dev, staging and prod env in K8S?
+- ConfigMap and secrets - Store env specific config 
+- Env variables - Inject env-specific values in containers
+
+
+18. A dev reports pod cannot write mounted volume. How to diagnose?
+- Check pod events using describe command. Check for any volume mount errros
+- Check PV/PVC status - Ensure PVC is bound to PV and PV is available
+- Check storage class 
+- Check node logs where pod is running
+- Check for permissions of mounted directory within container
+
+
+19. How to manage certs and TLS in K8S?
+- Store TLS certs as secrets 
+- Ingress resources can use TLS secrets to terminate SSL/TLS at ingress controller
+- Cert manager - To automate renewal of TLS certs from various issuing sources
+
+
+20. What is kubeconfig?
+- YML file containing info about K8S clusters, users and contexts. Allows kubectl to connect to and authenticate with different K8S clusters
+
+
+21. What is multi cluster K8S setup? Why need it?
+- It involves managing multiple independent K8S clusters
+- Reason :-
+  High availability, disaster recovery to distribute workloads across regions/cloud providers to ensure business continuity
+  Latency - deploying app closer to users in different regions
+  Isolation 
+  Hybrid cloud
+  Overcoming scaling resource limits of single cluster
+
+
+22. What is etcd?
+- Its a distributed, consistent and highly available key-value store used by K8S as primary datastore. 
+- It stores all cluster state, config data and metadata of resources
+- Chacteristics - consistency, high availability with multiple instances, distributed as can run across machines, key value store to store andf retrieve data
+
+
+23. What is the significance of targetPort and port fields in K8S service?
+- port is the port that service itself exposes within cluster. Other services and client will connect to this port
+- targetPort is the port on pod that service will forward traffic to where app listens requests
+- Port allows service to have stable external port while targetPort allows flexibility in how app inside pod is configured
+
+
+24. How to effectively manage K8S secrets?
+- Use K8S secrets to store sensitive data
+- Avoid storing secrets in git
+- Integrate with external secret management system like vault of secret manager
+- Use RBAC policies
+- Encryption at rest , ensure etcd is encrypted
+- Rotate secrets regularly
+
+
+25. How to troubleshoot network latency issue between pods in K8S cluster?
+- Identify affected pods/services
+- Check network interface stats, CPU and general network performance on affected nodes
+- Check if there is any latency at host or cloud provider network level
+
+
+26. Explain volumeClaimTemplates in stateful sets
+- Used to auto provision PVC for each replica of stateful set
+- Each pod managed by stateful set will get its own unique PVC based on template. 
+- It ensures each stateful pod has its own dedicated and persistent storage
+
+  
+27. Where and how we can use ServiceAccount and ClusterRoleBinding together?
+- We've app running in pod that needs to list all nodes in cluster for monitoring
+- Create service account for app pod
+- Create cluster role that defines permissions to get and list nodes resource
+- Create cluster role binding that binds cluster role to service account
+
+
+28. How to secure K8S cluster beyond network policies?
+- Firewalls/security groups to restrict ingress/egress traffic to/from nodes
+- VPC peering/VPN to securely connect K8S clusters to other private networks
+- Egress network policies to control outbound traffic from pods
+
+
+29. How to implement blue/green in K8S?
+- Have 2 deployments blue(current), green (new)
+- Use service pointing to blue deployment
+- To switch to green, update service's selector to point to green deployment's labels
+- If issue arises with green, simply revert service's selector back to blue
+
+
+30. 
+
+
+
+
+
+
+
+60, 62
