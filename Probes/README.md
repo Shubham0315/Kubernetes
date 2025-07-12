@@ -15,9 +15,8 @@ DEMO
 
 <img width="1557" height="794" alt="image" src="https://github.com/user-attachments/assets/561528ce-903d-41d4-90ce-1ec4dba58fee" />
 
-- If our liveness probe is created and our pod is ready, we can also create readiness probe
+- If our liveness probe is created and our pod is ready, we can also create readiness probe like above
 
-![image](https://github.com/user-attachments/assets/28746adf-cea2-4926-933f-cf73ece9247e)
 
 - Now we can apply service and deployment. When we check for pods, we get pods list
 - To checkif the liveness/readiness probe got triggered inside pod :- **kubectl describe pod $name**
