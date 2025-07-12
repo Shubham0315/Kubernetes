@@ -1,5 +1,6 @@
 # Probes
 
+- Probes are used to monitor health of containers inside pod
 - Probes are of 3 types :- Liveness, Readiness and Startup
 - Probe is a kind of request that ensure our pod works fine
   - Suppose our pod is working on port 3000 but weve to make sure that its running on 3000.
