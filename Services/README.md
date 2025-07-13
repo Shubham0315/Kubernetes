@@ -13,7 +13,7 @@ NO SERVICE Scenario
 
 SERVICE Scenario
 -
-- Here on top of deployment we can create service. So instead of accessing pods, users can directly access service. So there wornt be any issue even if IP address gets changed (amazon.com)
+- Here on top of deployment we can create service. So instead of accessing pods, users can directly access service. So there wont be any issue even if IP address gets changed (amazon.com)
 - Instead of giving IP addresses to pods, we can create service on top of deployments. This service acts as Load Balancer which uses component in K8s which is "kubeproxy". So instead of using IP address, access pod/app using service name
 - If user is not able to reach IP address of pod due to change in IP address, service will take request from user and forward it to the correct IP
 
