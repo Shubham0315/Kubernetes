@@ -48,3 +48,20 @@ We create svc-acc - create role - using role binding bind the svc-acc and role t
 
 - If we create role for specific namespace, it is called as role and if we create role within cluster scope, it is cluster role
 
+--------------------------------------------------------
+
+# Core Concepts
+
+- **Role** -	Defines a set of permissions (verbs on resources) within a namespace.
+- **ClusterRole** -	Like a Role, but applies cluster-wide (across all namespaces or cluster-scoped resources).
+- **RoleBinding**	- Binds a Role to a user/group/service account within a namespace.
+- **ClusterRoleBinding** -	Binds a ClusterRole to a subject across the entire cluster.
+
+- get, list, watch – Read operations
+- create, update, patch, delete – Write operations
+- exec, impersonate, bind, escalate – Special actions
+
+- RBAC use cases
+  - App reads Pods in one namespace	:- Role + RoleBinding
+  - Admin monitors nodes :-	ClusterRole + ClusterRoleBinding
+  - CI/CD job deploys to prod	:- Role/ClusterRole scoped to deployments, pods, etc.
