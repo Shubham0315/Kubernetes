@@ -4,7 +4,7 @@
 - Initially before 2015, people were creating deployment, pod where deployment will provide auto healing auto scaling, we can create service on top of pod so that we can expose app within or outside k8s cluster with load balancing. There wasn't a concept of Ingress initially.
 
 - Still there were some practical problems with k8s use.
-  - What people used to do is on their virtual machines or physical servers, they deploy the app where they use LB like nginx, FI which ere of enterprise level
+  - What people used to do is on their virtual machines or physical servers, they deploy the app where they use LB like nginx, FI which were of enterprise level
 
 - Enterprise LB offers very good LB capabilities like below:-
   - Ratio based LB :- send 3 requests to pod1 and 7 to pod2
