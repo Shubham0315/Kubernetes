@@ -38,6 +38,8 @@ Practical Demo
  
 ![image](https://github.com/user-attachments/assets/b0b10956-4fbb-47ad-a89d-06819983835e)
 
+- Create pod by CLI :- **kubectl run nginx-pod --image=nginx**
+
 
 - Write pod.yml file like below
 - In pod spec, we write containers for which we need to provide name and image to be used to create container, provide ports. 
